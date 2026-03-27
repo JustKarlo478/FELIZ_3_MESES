@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1 Año y 3 Meses Juntos 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@300;400;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #e8829a;
+    --rose-light: #f5c2ce;
+    --rose-dark: #c45c78;
+    --gold: #f0c070;
+    --gold-light: #fde9b0;
+    --flame: #ff6b35;
+    --flame-light: #ffaa70;
+    --cream: #fff8f0;
+    --soft-pink: #fdeef3;
+    --purple-soft: #e8d5f5;
+    --text-dark: #3a2030;
+    --text-mid: #6b4058;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ===== PARTICLES / PETALS ===== */
+  #petals-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(160deg, #fff0f5 0%, #ffe8d6 40%, #fff5e0 100%);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 30%, rgba(232,130,154,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 80% 70%, rgba(240,192,112,0.15) 0%, transparent 70%);
+  }
+
+  .flame-border {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--rose), var(--flame), var(--gold), var(--flame), var(--rose));
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .hero-badge {
+    background: linear-gradient(135deg, var(--flame), var(--gold));
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.4rem 1.2rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(255,107,53,0.3);
+    animation: fadeDown 1s ease both;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3rem, 9vw, 6.5rem);
+    line-height: 1.1;
+    color: var(--rose-dark);
+    text-shadow: 2px 4px 20px rgba(196,92,120,0.2);
+    animation: fadeDown 1s ease 0.2s both;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-title span {
+    background: linear-gradient(135deg, var(--flame), var(--rose-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--text-mid);
+    margin-top: 0.8rem;
+    animation: fadeDown 1s ease 0.4s both;
+    position: relative;
+    z-index: 1;
+  }
+
+  .flame-divider {
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: fadeDown 1s ease 0.6s both;
+    position: relative;
+    z-index: 1;
+  }
+
+  .flame-divider .line {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--rose));
+  }
+  .flame-divider .line.right {
+    background: linear-gradient(90deg, var(--rose), transparent);
+  }
+
+  .flame-divider .icon { font-size: 1.8rem; }
+
+  /* Counter */
+  .counter-wrap {
+    position: relative;
+    z-index: 1;
+    animation: fadeDown 1s ease 0.8s both;
+    margin-bottom: 2rem;
+  }
+
+  .counter-grid {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .counter-box {
+    background: white;
+    border-radius: 20px;
+    padding: 1.2rem 1.8rem;
+    min-width: 100px;
+    box-shadow: 0 8px 30px rgba(232,130,154,0.2), 0 2px 8px rgba(0,0,0,0.05);
+    border: 1.5px solid rgba(232,130,154,0.2);
+    transition: transform 0.3s;
+  }
+
+  .counter-box:hover { transform: translateY(-5px); }
+
+  .counter-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--flame), var(--rose-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .counter-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-top: 0.3rem;
+  }
+
+  .scroll-hint {
+    position: relative;
+    z-index: 1;
+    margin-top: 2rem;
+    animation: bounce 2s ease infinite;
+    color: var(--rose);
+    font-size: 1.5rem;
+  }
+
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    position: relative;
+    padding: 6rem 2rem;
+    z-index: 1;
+  }
+
+  .section-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--flame);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .section-tag::before, .section-tag::after {
+    content: '';
+    flex: 1;
+    max-width: 40px;
+    height: 1px;
+    background: var(--flame);
+    opacity: 0.5;
+  }
+  .section-tag::before { display: none; }
+
+  .section-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: var(--rose-dark);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .section-desc {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--text-mid);
+    font-size: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  /* ===== RENGOKU BANNER ===== */
+  .rengoku-banner {
+    background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 40%, #1a0a00 100%);
+    border-radius: 24px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(255,107,53,0.3);
+  }
+
+  .rengoku-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(255,107,53,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(240,192,112,0.2) 0%, transparent 50%);
+  }
+
+  .rengoku-banner .flames {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background: linear-gradient(0deg, rgba(255,107,53,0.3) 0%, transparent 100%);
+    animation: flicker 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes flicker {
+    0% { opacity: 0.6; transform: scaleY(1); }
+    100% { opacity: 1; transform: scaleY(1.05); }
+  }
+
+  .rengoku-quote {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .rengoku-quote .char-name {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+  }
+
+  .rengoku-quote .char-name::before,
+  .rengoku-quote .char-name::after {
+    content: '🔥';
+    font-size: 1rem;
+  }
+
+  .rengoku-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--gold-light);
+    line-height: 1.7;
+    text-shadow: 0 2px 10px rgba(240,192,112,0.4);
+  }
+
+  /* ===== JOJO SECTION ===== */
+  .jojo-section {
+    background: linear-gradient(135deg, #0d0d1a 0%, #1a1030 50%, #0d0d1a 100%);
+    border-radius: 24px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(100,60,180,0.3);
+    margin-bottom: 3rem;
+  }
+
+  .jojo-section::before {
+    content: '★ DIO ★';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    font-size: 8rem;
+    font-weight: 900;
+    font-family: 'Playfair Display', serif;
+    color: rgba(255,215,0,0.04);
+    white-space: nowrap;
+    letter-spacing: 0.3em;
+    pointer-events: none;
+  }
+
+  .jojo-stars {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .jojo-stars span {
+    position: absolute;
+    font-size: 0.6rem;
+    color: rgba(255,215,0,0.3);
+    animation: twinkle 3s ease infinite;
+  }
+
+  @keyframes twinkle {
+    0%,100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.3); }
+  }
+
+  .jojo-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .jojo-badge {
+    display: inline-block;
+    border: 2px solid var(--gold);
+    padding: 0.3rem 1rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .jojo-badge::before, .jojo-badge::after {
+    content: '◆';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    color: var(--gold);
+  }
+  .jojo-badge::before { left: -1rem; }
+  .jojo-badge::after { right: -1rem; }
+
+  .jojo-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 30px rgba(240,192,112,0.5);
+    margin-bottom: 1rem;
+  }
+
+  .jojo-desc {
+    font-style: italic;
+    color: rgba(255,230,180,0.8);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* ===== REASONS GRID ===== */
+  .reasons-section {
+    background: linear-gradient(160deg, #fff5f8 0%, #fff8ee 100%);
+  }
+
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .reason-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 6px 30px rgba(232,130,154,0.12);
+    border: 1.5px solid rgba(232,130,154,0.15);
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .reason-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--rose), var(--flame));
+    transform: scaleY(0);
+    transition: transform 0.35s ease;
+  }
+
+  .reason-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(232,130,154,0.25);
+  }
+
+  .reason-card:hover::before { transform: scaleY(1); }
+
+  .reason-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(232,130,154,0.15);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .reason-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
+
+  .reason-text {
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  /* ===== LETTER SECTION ===== */
+  .letter-section {
+    background: linear-gradient(160deg, #fff8ee 0%, #fef0f5 100%);
+  }
+
+  .letter-paper {
+    background: white;
+    border-radius: 24px;
+    padding: 3.5rem;
+    box-shadow:
+      0 2px 0 rgba(240,192,112,0.4),
+      0 20px 60px rgba(196,92,120,0.1),
+      inset 0 0 0 1px rgba(240,192,112,0.15);
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .letter-paper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 4px;
+    background: linear-gradient(90deg, var(--rose), var(--flame), var(--gold), var(--flame), var(--rose));
+    border-radius: 24px 24px 0 0;
+    background-size: 200%;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .letter-lines {
+    position: absolute;
+    inset: 4rem 2.5rem 2.5rem;
+    background-image: repeating-linear-gradient(
+      transparent,
+      transparent 31px,
+      rgba(232,130,154,0.08) 31px,
+      rgba(232,130,154,0.08) 32px
+    );
+    pointer-events: none;
+    border-radius: 8px;
+  }
+
+  .letter-date {
+    text-align: right;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: var(--text-mid);
+    margin-bottom: 2rem;
+    opacity: 0.7;
+  }
+
+  .letter-greeting {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    color: var(--rose-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .letter-body {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    line-height: 2;
+    color: var(--text-dark);
+    position: relative;
+    z-index: 1;
+  }
+
+  .letter-body p { margin-bottom: 1.2rem; }
+
+  .letter-signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--rose-dark);
+    margin-top: 2rem;
+    text-align: right;
+  }
+
+  /* ===== FINAL SECTION ===== */
+  .final-section {
+    background: linear-gradient(160deg, #1a0a10 0%, #2d0d20 50%, #1a0820 100%);
+    text-align: center;
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 50% 100%, rgba(255,107,53,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(232,130,154,0.1) 0%, transparent 70%);
+  }
+
+  .final-hearts {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .final-hearts span {
+    position: absolute;
+    font-size: 1rem;
+    animation: floatUp 8s ease-in infinite;
+    opacity: 0;
+  }
+
+  @keyframes floatUp {
+    0% { opacity: 0; transform: translateY(0) rotate(0deg) scale(0.5); }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-120vh) rotate(360deg) scale(1.2); }
+  }
+
+  .final-inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  .final-inner .big-heart {
+    font-size: 5rem;
+    animation: heartbeat 1.5s ease infinite;
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    14% { transform: scale(1.15); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.1); }
+    56% { transform: scale(1); }
+  }
+
+  .final-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--gold-light);
+    text-shadow: 0 0 40px rgba(240,192,112,0.4);
+    margin-bottom: 1rem;
+  }
+
+  .final-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: rgba(255,230,200,0.7);
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--cream); }
+  ::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 10px; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 600px) {
+    .letter-paper { padding: 2rem 1.5rem; }
+    .rengoku-banner, .jojo-section { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="petals-canvas"></canvas>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="flame-border"></div>
+
+  <div class="hero-badge">✦ 1 Año & 3 Meses ✦</div>
+
+  <h1 class="hero-title">
+    Tú y Yo<br>
+    <span>para siempre</span>
+  </h1>
+
+  <p class="hero-subtitle">Desde aquel día... mi mundo cambió contigo 🌸</p>
+
+  <div class="flame-divider">
+    <div class="line"></div>
+    <span class="icon">💕</span>
+    <div class="line right"></div>
+  </div>
+
+  <div class="counter-wrap">
+    <div class="counter-grid">
+      <div class="counter-box">
+        <div class="counter-num" id="cnt-days">0</div>
+        <div class="counter-label">Días</div>
+      </div>
+      <div class="counter-box">
+        <div class="counter-num" id="cnt-hours">0</div>
+        <div class="counter-label">Horas</div>
+      </div>
+      <div class="counter-box">
+        <div class="counter-num" id="cnt-mins">0</div>
+        <div class="counter-label">Minutos</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- RENGOKU SECTION -->
+<section style="background: linear-gradient(160deg,#fff5ee 0%,#fff0e8 100%); padding: 5rem 2rem;">
+  <div class="section-inner reveal">
+    <div class="section-tag">🔥 Kimetsu no Yaiba</div>
+    <h2 class="section-title">El Corazón Arde con Llamas</h2>
+    <p class="section-desc">Como Rengoku, nuestro amor quema brillante e imparable</p>
+
+    <div class="rengoku-banner">
+      <div class="flames"></div>
+      <div class="rengoku-quote">
+        <div class="char-name">Kyojuro Rengoku — Pilar de las Llamas</div>
+        <blockquote>
+          "¡Enciende tu corazón y que arda como una llama!<br>
+          No importa cuán oscura sea la noche..."
+        </blockquote>
+      </div>
+    </div>
+
+    <div style="background:white; border-radius:20px; padding:2rem; box-shadow:0 8px 30px rgba(232,130,154,0.12); border:1.5px solid rgba(255,107,53,0.15); text-align:center;">
+      <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:1.05rem; color:var(--text-mid); line-height:1.8;">
+        Igual que Rengoku protegía a quienes amaba con cada fibra de su ser,<br>
+        <strong style="color:var(--rose-dark);">yo te protejo a ti.</strong><br>
+        Con el mismo fuego que él llevaba en el pecho,<br>
+        llevo yo tu nombre grabado en mi corazón. 🌸🔥
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- JOJO SECTION -->
+<section style="padding: 5rem 2rem; background: linear-gradient(160deg,#f5f0ff 0%, #fff0f5 100%);">
+  <div class="section-inner reveal">
+    <div class="section-tag">⭐ JoJo's Bizarre Adventure</div>
+    <h2 class="section-title">Un Amor Que Desafía el Destino</h2>
+    <p class="section-desc">Porque nuestro amor es tan épico como un Stand Battle</p>
+
+    <div class="jojo-section">
+      <div class="jojo-stars" id="jojo-stars"></div>
+      <div class="jojo-inner">
+        <div class="jojo-badge">Stand Name</div>
+        <div class="jojo-title">「ETERNAL LOVE」</div>
+        <p class="jojo-desc">
+          Habilidad: Hacer que el tiempo se detenga cuando te miro.<br>
+          Debilidad: Solo tú. Siempre tú.
+        </p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+      <div style="background:white;border-radius:16px;padding:1.5rem;box-shadow:0 4px 20px rgba(100,60,180,0.1);border:1px solid rgba(150,80,220,0.15);">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem;">🌟</div>
+        <p style="font-family:'Playfair Display',serif;font-style:italic;color:var(--text-mid);font-size:0.9rem;line-height:1.6;">
+          "Nuestro destino no fue accidente. Fue la voluntad del universo."
+        </p>
+      </div>
+      <div style="background:white;border-radius:16px;padding:1.5rem;box-shadow:0 4px 20px rgba(100,60,180,0.1);border:1px solid rgba(150,80,220,0.15);">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem;">💎</div>
+        <p style="font-family:'Playfair Display',serif;font-style:italic;color:var(--text-mid);font-size:0.9rem;line-height:1.6;">
+          "Como los Joestar, llevaré tu corazón conmigo a través de cada aventura."
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REASONS SECTION -->
+<section class="reasons-section">
+  <div class="section-inner">
+    <div class="section-tag reveal">💖 Razones</div>
+    <h2 class="section-title reveal">Por Qué Te Amo</h2>
+    <p class="section-desc reveal">Solo algunas de las infinitas razones...</p>
+
+    <div class="reasons-grid">
+      <div class="reason-card reveal">
+        <span class="reason-icon">🌸</span>
+        <div class="reason-num">01</div>
+        <p class="reason-text">Porque tu sonrisa es capaz de iluminar el día más gris, como el sol después de la lluvia.</p>
+      </div>
+      <div class="reason-card reveal">
+        <span class="reason-icon">🔥</span>
+        <div class="reason-num">02</div>
+        <p class="reason-text">Porque compartes mi amor por los animes épicos y entiendes por qué Rengoku merece el mundo entero.</p>
+      </div>
+      <div class="reason-card reveal">
+        <span class="reason-icon">💫</span>
+        <div class="reason-num">03</div>
+        <p class="reason-text">Porque cuando estoy contigo, el tiempo vuela y quiero que se detenga como un Stand de JoJo.</p>
+      </div>
+      <div class="reason-card reveal">
+        <span class="reason-icon">🌙</span>
+        <div class="reason-num">04</div>
+        <p class="reason-text">Porque en tus ojos encuentro el lugar más seguro y cálido del universo.</p>
+      </div>
+      <div class="reason-card reveal">
+        <span class="reason-icon">🌺</span>
+        <div class="reason-num">05</div>
+        <p class="reason-text">Porque tu manera de reír es mi canción favorita, y la escucho en bucle en mi corazón.</p>
+      </div>
+      <div class="reason-card reveal">
+        <span class="reason-icon">💝</span>
+        <div class="reason-num">06</div>
+        <p class="reason-text">Porque 1 año y 3 meses contigo se sienten como el comienzo de la mejor historia de amor jamás contada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LETTER SECTION -->
+<section class="letter-section">
+  <div class="section-inner">
+    <div class="section-tag reveal">💌 Carta</div>
+    <h2 class="section-title reveal">Para Ti, Con Todo Mi Amor</h2>
+    <p class="section-desc reveal">Palabras que salen del corazón</p>
+
+    <div class="letter-paper reveal">
+      <div class="letter-lines"></div>
+
+      <div class="letter-date">27 de Marzo, 2026 🌸</div>
+
+      <div class="letter-greeting">Mi amor,</div>
+
+      <div class="letter-body">
+        <p>
+          Hoy se cumplen 1 año y 3 meses desde que mi vida cambió para siempre. 
+          Desde el día que llegaste a ella, cada momento tiene más color, más luz y más sentido.
+        </p>
+        <p>
+          Hay días en que te miro y pienso que incluso Rengoku, con todo su fuego y su valor, 
+          no hubiera podido describir lo que siento por ti. Porque lo que tenemos no necesita 
+          palabras épicas ni batallas heroicas — solo necesita este instante, tú y yo. 🔥
+        </p>
+        <p>
+          Como diría JoJo: "¡Este es realmente el latido de nuestro corazón juntos!" 
+          Un amor que desafía cualquier lógica y que ningún enemigo podría detener. ⭐
+        </p>
+        <p>
+          Gracias por cada risa compartida, por cada capítulo visto juntos, por cada abrazo 
+          que me recuerda que tengo suerte infinita de tenerte. Gracias por ser tú, con todo 
+          lo que eso significa.
+        </p>
+        <p>
+          Prometo que seguiré eligiéndote. Hoy, mañana y en cada página de nuestra historia. 
+          Porque contigo, cada día es la mejor aventura que podría haber imaginado. 💕
+        </p>
+      </div>
+
+      <div class="letter-signature">
+        Siempre tuyo/a 🌸<br>
+        <span style="font-size:1.1rem;color:var(--text-mid);">Con todo mi corazón</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL SECTION -->
+<section class="final-section">
+  <div class="final-hearts" id="final-hearts"></div>
+  <div class="final-inner">
+    <span class="big-heart">💖</span>
+    <h2 class="final-title">Tú eres mi historia favorita</h2>
+    <p class="final-sub">
+      Y apenas estamos en el capítulo 1 año y 3 meses...<br>
+      Faltan infinitas páginas hermosas por vivir contigo. 🌸🔥⭐
+    </p>
+    <div style="margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(240,192,112,0.3);border-radius:100px;padding:0.5rem 1.2rem;color:var(--gold-light);font-size:0.8rem;letter-spacing:0.1em;">🌸 Mi Flor</div>
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,107,53,0.3);border-radius:100px;padding:0.5rem 1.2rem;color:#ffaa70;font-size:0.8rem;letter-spacing:0.1em;">🔥 Mi Llama</div>
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(200,150,255,0.3);border-radius:100px;padding:0.5rem 1.2rem;color:#e8d5ff;font-size:0.8rem;letter-spacing:0.1em;">⭐ Mi Estrella</div>
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(232,130,154,0.3);border-radius:100px;padding:0.5rem 1.2rem;color:#f5c2ce;font-size:0.8rem;letter-spacing:0.1em;">💕 Mi Todo</div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ===== COUNTER =====
+function updateCounter() {
+  const start = new Date('2024-12-27T00:00:00');
+  const now = new Date();
+  const diff = now - start;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+  document.getElementById('cnt-days').textContent = days.toLocaleString();
+  document.getElementById('cnt-hours').textContent = hours;
+  document.getElementById('cnt-mins').textContent = mins;
+}
+updateCounter();
+setInterval(updateCounter, 60000);
+
+// ===== PETALS CANVAS =====
+const canvas = document.getElementById('petals-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+const petals = [];
+const petalColors = ['#f5c2ce','#fde8f0','#fbb8ca','#ffddcc','#fde9b0'];
+
+class Petal {
+  constructor() { this.reset(); this.y = Math.random() * -200; }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = -20;
+    this.size = Math.random() * 8 + 5;
+    this.speed = Math.random() * 1.5 + 0.5;
+    this.wind = (Math.random() - 0.5) * 1;
+    this.rotation = Math.random() * Math.PI * 2;
+    this.rotSpeed = (Math.random() - 0.5) * 0.05;
+    this.alpha = Math.random() * 0.5 + 0.3;
+    this.color = petalColors[Math.floor(Math.random() * petalColors.length)];
+  }
+  update() {
+    this.y += this.speed;
+    this.x += this.wind;
+    this.rotation += this.rotSpeed;
+    if (this.y > canvas.height + 20) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rotation);
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+for (let i = 0; i < 40; i++) petals.push(new Petal());
+
+function animatePetals() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  petals.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animatePetals);
+}
+animatePetals();
+
+// ===== JOJO STARS =====
+const starsContainer = document.getElementById('jojo-stars');
+for (let i = 0; i < 20; i++) {
+  const s = document.createElement('span');
+  s.textContent = '★';
+  s.style.left = Math.random() * 100 + '%';
+  s.style.top = Math.random() * 100 + '%';
+  s.style.animationDelay = Math.random() * 3 + 's';
+  s.style.animationDuration = (Math.random() * 2 + 2) + 's';
+  starsContainer.appendChild(s);
+}
+
+// ===== FLOATING HEARTS (FINAL) =====
+const heartsContainer = document.getElementById('final-hearts');
+const heartEmojis = ['💕','💖','💗','💓','🌸','✨','⭐','🔥'];
+for (let i = 0; i < 20; i++) {
+  const h = document.createElement('span');
+  h.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+  h.style.left = Math.random() * 100 + '%';
+  h.style.bottom = '0';
+  h.style.animationDelay = Math.random() * 8 + 's';
+  h.style.animationDuration = (Math.random() * 4 + 6) + 's';
+  h.style.fontSize = (Math.random() * 1 + 0.6) + 'rem';
+  heartsContainer.appendChild(h);
+}
+
+// ===== SCROLL REVEAL =====
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
